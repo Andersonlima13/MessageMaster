@@ -10,6 +10,7 @@ import { QuickAccessModule } from '@/components/dashboard/quick-access-module';
 import { ChannelsModule } from '@/components/dashboard/channels-module';
 import { GroupsModule } from '@/components/dashboard/groups-module';
 import { OrganizationModule } from '@/components/dashboard/organization-module';
+import { AdvancedMetrics } from '@/components/dashboard/advanced-metrics';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Dashboard() {
@@ -45,6 +46,11 @@ export default function Dashboard() {
 
           {/* Conversation Metrics */}
           <ConversationMetrics channels={channels} />
+          
+          {/* Advanced Metrics Section */}
+          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6 mb-8">
+            <AdvancedMetrics />
+          </div>
 
           {/* Conversations and Announcements */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
