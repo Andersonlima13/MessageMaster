@@ -8,9 +8,9 @@ import { useQuery } from '@tanstack/react-query';
 
 export function UsersModule() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [profileFilter, setProfileFilter] = useState('');
-  const [groupFilter, setGroupFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [profileFilter, setProfileFilter] = useState('all');
+  const [groupFilter, setGroupFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 4;
 
@@ -87,7 +87,7 @@ export function UsersModule() {
                 <SelectValue placeholder="Todos os perfis" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todos os perfis</SelectItem>
+                <SelectItem value="all">Todos os perfis</SelectItem>
                 <SelectItem value="aluno">Aluno</SelectItem>
                 <SelectItem value="funcionario">Funcionário</SelectItem>
                 <SelectItem value="admin">Admin</SelectItem>
@@ -99,7 +99,7 @@ export function UsersModule() {
                 <SelectValue placeholder="Todos os grupos" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todos os grupos</SelectItem>
+                <SelectItem value="all">Todos os grupos</SelectItem>
                 {groups.map((group: any) => (
                   <SelectItem key={group.id} value={group.id.toString()}>
                     {group.name}
@@ -113,7 +113,7 @@ export function UsersModule() {
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todos</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 <SelectItem value="cadastrado">Cadastrado</SelectItem>
                 <SelectItem value="não cadastrado">Não cadastrado</SelectItem>
               </SelectContent>

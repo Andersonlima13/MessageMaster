@@ -304,8 +304,14 @@ export class MemStorage implements IStorage {
     const id = this.channelIdCounter++;
     const now = new Date();
     const channel: Channel = { 
-      ...channelData, 
-      id, 
+      id,
+      name: channelData.name,
+      type: channelData.type,
+      icon: channelData.icon,
+      status: channelData.status || 'active',
+      description: channelData.description || null,
+      averageResponseTime: channelData.averageResponseTime || null,
+      csatScore: channelData.csatScore || null,
       createdAt: now
     };
     this.channels.set(id, channel);
@@ -374,8 +380,11 @@ export class MemStorage implements IStorage {
     const id = this.conversationIdCounter++;
     const now = new Date();
     const conversation: Conversation = { 
-      ...conversationData, 
-      id, 
+      id,
+      channelId: conversationData.channelId,
+      userId: conversationData.userId,
+      title: conversationData.title || null,
+      status: conversationData.status || 'pendente',
       lastMessageAt: now,
       createdAt: now
     };

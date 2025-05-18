@@ -11,7 +11,11 @@ export function Sidebar({ organizationName }: SidebarProps) {
   const [location] = useLocation();
 
   // Get organization settings for the plan data
-  const { data: settings } = useQuery({
+  const { data: settings = { 
+    planType: 'Premium',
+    planMessagesLimit: 1000,
+    planMessagesUsed: 250
+  } } = useQuery({
     queryKey: ['/api/organization-settings'],
   });
 
@@ -30,59 +34,41 @@ export function Sidebar({ organizationName }: SidebarProps) {
       
       <div className="overflow-y-auto flex-grow">
         <nav className="mt-5 px-3 space-y-1">
-          <Link href="/">
-            <a className={`sidebar-link ${isActive('/') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">dashboard</span>
-              <span className="font-medium">Dashboard</span>
-            </a>
+          <Link href="/" className={`sidebar-link ${isActive('/') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">dashboard</span>
+            <span className="font-medium">Dashboard</span>
           </Link>
-          <Link href="/conversas">
-            <a className={`sidebar-link ${isActive('/conversas') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">chat</span>
-              <span className="font-medium">Conversas</span>
-            </a>
+          <Link href="/conversas" className={`sidebar-link ${isActive('/conversas') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">chat</span>
+            <span className="font-medium">Conversas</span>
           </Link>
-          <Link href="/comunicados">
-            <a className={`sidebar-link ${isActive('/comunicados') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">campaign</span>
-              <span className="font-medium">Comunicados</span>
-            </a>
+          <Link href="/comunicados" className={`sidebar-link ${isActive('/comunicados') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">campaign</span>
+            <span className="font-medium">Comunicados</span>
           </Link>
-          <Link href="/pessoas">
-            <a className={`sidebar-link ${isActive('/pessoas') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">people</span>
-              <span className="font-medium">Pessoas</span>
-            </a>
+          <Link href="/pessoas" className={`sidebar-link ${isActive('/pessoas') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">people</span>
+            <span className="font-medium">Pessoas</span>
           </Link>
-          <Link href="/canais">
-            <a className={`sidebar-link ${isActive('/canais') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">forum</span>
-              <span className="font-medium">Canais</span>
-            </a>
+          <Link href="/canais" className={`sidebar-link ${isActive('/canais') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">forum</span>
+            <span className="font-medium">Canais</span>
           </Link>
-          <Link href="/grupos">
-            <a className={`sidebar-link ${isActive('/grupos') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">group_work</span>
-              <span className="font-medium">Grupos</span>
-            </a>
+          <Link href="/grupos" className={`sidebar-link ${isActive('/grupos') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">group_work</span>
+            <span className="font-medium">Grupos</span>
           </Link>
-          <Link href="/configuracoes">
-            <a className={`sidebar-link ${isActive('/configuracoes') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">settings</span>
-              <span className="font-medium">Configurações</span>
-            </a>
+          <Link href="/configuracoes" className={`sidebar-link ${isActive('/configuracoes') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">settings</span>
+            <span className="font-medium">Configurações</span>
           </Link>
-          <Link href="/acessos">
-            <a className={`sidebar-link ${isActive('/acessos') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">link</span>
-              <span className="font-medium">Acessos</span>
-            </a>
+          <Link href="/acessos" className={`sidebar-link ${isActive('/acessos') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">link</span>
+            <span className="font-medium">Acessos</span>
           </Link>
-          <Link href="/integracoes">
-            <a className={`sidebar-link ${isActive('/integracoes') ? 'active' : ''}`}>
-              <span className="material-icons-outlined sidebar-link-icon">sync</span>
-              <span className="font-medium">Integrações</span>
-            </a>
+          <Link href="/integracoes" className={`sidebar-link ${isActive('/integracoes') ? 'active' : ''}`}>
+            <span className="material-icons-outlined sidebar-link-icon">sync</span>
+            <span className="font-medium">Integrações</span>
           </Link>
         </nav>
       </div>
