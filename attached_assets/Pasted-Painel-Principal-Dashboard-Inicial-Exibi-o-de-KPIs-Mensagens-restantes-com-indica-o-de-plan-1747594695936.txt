@@ -1,0 +1,94 @@
+Painel Principal (Dashboard Inicial):
+Exibição de KPIs:
+Mensagens restantes (com indicação de plano, ex: "Plano Premium").
+Taxa de leitura de mensagens.
+Taxa de Adesão (ex: nº de aderidos, % do total de alunos, nº de pendentes).
+Pontuação CSAT (Customer Satisfaction Score) com visualização gráfica (velocímetro).
+Dados Gerais das Conversas: Tabela resumida com Colunas: Canal, Tempo médio de atendimento, Pontuação CSAT, Responsáveis.
+Módulo de Conversas:
+Listagem de conversas com colunas: Usuários (com avatares e nomes), Grupos, Canal (com ícone/logo), Tipo de canal, Status da conversa (ex: Pendente, Finalizado, Sem status).
+Busca por nome de aluno ou canal.
+Paginação da lista de conversas.
+Botão "Tudo sobre Conversas" (link para mais detalhes ou filtro).
+Módulo de Comunicados:
+Listagem de comunicados enviados com: Título/Assunto, Remetente, Data/Hora.
+Tags/Etiquetas visuais (ex: Rotina, Importante).
+Filtros e busca por palavra-chave.
+Visualização de modelos/tipos de comunicados pré-definidos (ex: TI, Produtos Cantina, Pedagógico, Refeições, Enfermagem, Solicitação de documentos, Ficha cadastral, Ficha médica, Autodeclaração de Saúde Diária).
+Módulo de Pessoas (Usuários):
+Listagem de usuários com colunas: Nome, Perfil (Aluno, Funcionário, Admin), Grupos associados, Contagem de Usuários (se aplicável), Status (Cadastrado, Não cadastrado).
+Opções de Ordenação e Filtro (Perfil, Grupo, Status).
+Busca por nome.
+Ação de "Adicionar pessoa" com formulário incluindo:
+Seleção de Perfil (Aluno, Funcionário, Admin).
+Detalhes: Nome completo, Descrição (opcional), Foto.
+Grupos: Associação a grupos existentes.
+Convites: Opção de adicionar e-mail ou celular para envio de convite.
+Ações de edição e exclusão por usuário.
+Módulo de Canais de Atendimento:
+Listagem de canais com colunas: Nome, Descrição, Tipo de canal, Grupos associados, Usuários, Status.
+Ação de "Adicionar canal".
+Ações de edição e exclusão por canal.
+Módulo de Grupos:
+Listagem de grupos com colunas: Nome do grupo, Visibilidade, Pessoas (contagem), Ação (editar/deletar).
+Ação de "Adicionar Grupo" com formulário para nome e configurações.
+Módulo de Configurações Gerais/Organização:
+Informações Básicas: Nome da instituição, Nome de usuário/subdomínio (ex: classapp.co/colegiovila), Link, Cor do tema, Idioma, País, Tipo (Escola).
+Tags Globais: Definição de tags para perfis (ex: Aluno, Responsável Pedagógico, Responsável Financeiro).
+Configuração de Etiquetas (Labels): Criação e gerenciamento de etiquetas coloridas para comunicados/mensagens (ex: Pesquisa, Coordenação, Eventos, RH, Nutrição, Importante, Tarefa de casa, Vila News, Urgente, Rotina, Comunicado).
+Funcionalidades Gerais (Switches on/off): Mensagens podem ser enviadas, Mídia pode ser enviada, Compromissos podem ser enviados.
+Módulo de Acessos (Links Rápidos):
+Listagem de links externos com: Ícone, Nome do Acesso, Endereço (URL), Tipo (URL), Ações (editar/deletar).
+Exemplos: Google for Education, Árvore de Livros, LMS, etc.
+Ação de "Adicionar Acesso".
+Módulo de Integrações:
+Espaço para listar e gerenciar integrações com sistemas de terceiros (mesmo que inicialmente vazio, como no vídeo).
+Interface Geral:
+Menu lateral de navegação.
+Header com nome da instituição, notificações (ícone de sino com contador), botão "Escrever" (para nova mensagem/comunicado), perfil do usuário logado.
+Design limpo, moderno, com bom uso de ícones e espaçamento.
+Ideias Interessantes para Inclusão e Aprimoramento (Novas Funcionalidades):
+Análise de Dados Avançada com Gráficos Interativos:
+Dashboard de Comunicação:
+Evolução da taxa de leitura ao longo do tempo (por semana/mês).
+Volume de mensagens trocadas (geral, por canal, por tipo de usuário).
+Gráfico de horários de pico de envio e recebimento de mensagens.
+Análise de sentimento (via IA) das conversas nos canais (Positivo, Neutro, Negativo).
+Tempo médio de primeira resposta e resolução por canal/atendente.
+Engajamento com comunicados (aberturas, cliques em links, reações).
+Comparativo de desempenho entre diferentes canais de atendimento.
+Dashboard de Adesão e Uso:
+Gráficos de usuários ativos (diário, semanal, mensal).
+Funil de adoção (convidado > cadastrado > ativo).
+Recursos mais utilizados na plataforma.
+Integração de Inteligência Artificial (IA):
+Respostas Inteligentes: Sugestões de respostas rápidas para atendentes nos canais, baseadas em histórico e FAQs.
+Chatbot para Canais Específicos: Um chatbot para o canal "Secretaria" ou "Suporte TI" para responder perguntas frequentes automaticamente.
+Categorização Automática de Mensagens: IA para sugerir ou aplicar etiquetas/tags automaticamente a novas mensagens.
+Sumarização de Conversas Longas: Capacidade de gerar um resumo de um tópico de conversa extenso.
+Assistente de Redação: IA para ajudar na elaboração de comunicados, sugerindo melhorias no tom, clareza ou gramática.
+Detecção de Urgência/Assuntos Críticos: Sinalização de mensagens que parecem urgentes ou tratam de temas sensíveis para priorização.
+Funcionalidades Pedagógicas Integradas:
+Criação e Gestão de Atividades/Tarefas:
+Professores podem criar atividades com descrição, data de entrega, anexos.
+Alunos podem submeter atividades pela plataforma (upload de arquivos, texto online).
+Notificações de novas atividades e prazos.
+Lançamento de Notas e Frequência:
+Interface para professores lançarem notas de atividades/avaliações.
+Registro de frequência dos alunos por aula/dia.
+Visualização de boletins parciais/finais para alunos e responsáveis.
+Feedback Individualizado: Ferramenta para professores enviarem feedback sobre atividades diretamente aos alunos.
+Espaço para Material de Apoio: Seção dentro de grupos/turmas para compartilhamento de materiais didáticos.
+Outras Melhorias Sugeridas:
+Calendário Integrado: Com eventos escolares, prazos de atividades, feriados, reuniões, visível para diferentes perfis.
+Módulo de Enquetes e Pesquisas: Para coletar feedback da comunidade escolar.
+Sistema de Notificações Push: Configurável para diferentes tipos de eventos e comunicados, com opções de personalização por usuário.
+Workflow de Aprovação: Para comunicados importantes que necessitem de aprovação antes do envio.
+Biblioteca de Documentos: Um local centralizado para documentos importantes da escola (regimento, calendários, formulários padrão).
+Gamificação: Elementos de gamificação para engajamento em atividades ou leitura de comunicados (badges, pontos).
+Tecnologias e Requisitos Não Funcionais (Sugestões):
+Design responsivo (desktop, tablet, mobile).
+Alta performance e escalabilidade.
+Segurança robusta dos dados (LGPD compliance).
+API para futuras integrações.
+Interface de administração para superusuários com controle total sobre configurações e permissões.
