@@ -35,9 +35,9 @@ export default function GruposPage() {
     return matchesSearch && matchesVisibility;
   });
 
-  // Function to create a new group
-  const createNewGroup = () => {
-    alert('Aqui abriria um modal para criar um novo grupo/turma');
+  // Function to open the new group dialog
+  const openGroupDialog = () => {
+    setIsDialogOpen(true);
   };
 
   // Function to format visibility in Portuguese
@@ -77,7 +77,7 @@ export default function GruposPage() {
               <p className="text-neutral-500">Gerencie os grupos e turmas da sua instituição</p>
             </div>
             <Button 
-              onClick={createNewGroup}
+              onClick={openGroupDialog}
               className="bg-primary-500 hover:bg-primary-600"
             >
               <span className="material-icons-outlined mr-2">group_add</span>
@@ -123,7 +123,7 @@ export default function GruposPage() {
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Nenhum grupo encontrado</h3>
                 <p className="text-gray-500 mb-4">Tente ajustar os filtros ou criar um novo grupo</p>
-                <Button onClick={createNewGroup} className="bg-primary-500">
+                <Button onClick={openGroupDialog} className="bg-primary-500">
                   <span className="material-icons-outlined mr-2">group_add</span>
                   Novo Grupo
                 </Button>
@@ -204,6 +204,9 @@ export default function GruposPage() {
           </div>
         </main>
       </div>
+      
+      {/* Dialog de novo grupo */}
+      <NovoGrupoDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </div>
   );
 }
