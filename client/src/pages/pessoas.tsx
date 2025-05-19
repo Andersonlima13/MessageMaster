@@ -31,6 +31,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { Badge } from '@/components/ui/badge';
+import { NovoUsuarioDialog } from '@/components/pessoas/novo-usuario-dialog';
 
 export default function PessoasPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -38,31 +39,32 @@ export default function PessoasPage() {
   const [groupFilter, setGroupFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pageSize = 10;
 
   // Fetch organization settings
-  const { data: organizationSettings } = useQuery({
+  const { data: organizationSettings = { name: 'Colégio Vila Educação' } } = useQuery({
     queryKey: ['/api/organization-settings'],
   });
 
   // Fetch users with pagination and filters
-  const { data: userData = { users: [], total: 0 } } = useQuery({
+  const { data: userData = { users: [], total: 0 } } = useQuery<{ users: any[], total: number }>({
     queryKey: ['/api/users', currentPage, pageSize, searchQuery, profileFilter, groupFilter, statusFilter],
   });
 
   const { users = [], total = 0 } = userData;
 
   // Fetch groups for filtering
-  const { data: groups = [] } = useQuery({
+  const { data: groups = [] } = useQuery<any[]>({
     queryKey: ['/api/groups'],
   });
 
   // Calculate total pages
   const totalPages = Math.ceil(total / pageSize);
 
-  // Function to create a new user
-  const createNewUser = () => {
-    alert('Aqui abriria um modal para criar um novo usuário');
+  // Function to open the new user dialog
+  const openUserDialog = () => {
+    setIsDialogOpen(true);
   };
 
   // Function to format status badges
@@ -122,7 +124,7 @@ export default function PessoasPage() {
               <p className="text-neutral-500">Gerencie todos os usuários da plataforma</p>
             </div>
             <Button 
-              onClick={createNewUser}
+              onClick={openUserDialog}
               className="bg-primary-500 hover:bg-primary-600"
             >
               <span className="material-icons-outlined mr-2">person_add</span>
@@ -318,6 +320,8 @@ export default function PessoasPage() {
           </Card>
         </main>
       </div>
+      {/* Dialog de novo usuário */}
+      <NovoUsuarioDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </div>
   );
 }
