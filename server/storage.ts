@@ -63,26 +63,152 @@ export interface IStorage {
   updateDashboardKpis(kpis: Partial<InsertDashboardKpi>): Promise<DashboardKpi>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private groups: Map<number, Group>;
-  private channels: Map<number, Channel>;
-  private conversations: Map<number, Conversation>;
-  private messages: Map<number, Message>;
-  private announcements: Map<number, Announcement>;
-  private labels: Map<number, Label>;
-  private quickLinks: Map<number, QuickLink>;
-  private organizationSettings: OrganizationSettings;
-  private dashboardKpis: DashboardKpi;
+import { db } from './db';
+import { eq, like, desc, asc, and, or, sql, isNull, not } from 'drizzle-orm';
+
+// Implementação com banco de dados PostgreSQL
+export class DatabaseStorage implements IStorage {
   
-  private userIdCounter: number;
-  private groupIdCounter: number;
-  private channelIdCounter: number;
-  private conversationIdCounter: number;
-  private messageIdCounter: number;
-  private announcementIdCounter: number;
-  private labelIdCounter: number;
-  private quickLinkIdCounter: number;
+  // USERS
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+
+  async createUser(userData: InsertUser): Promise<User> {
+    const [user] = await db.insert(users).values(userData).returning();
+    return user;
+  }
+
+  async getUsers(
+    page: number, 
+    limit: number, 
+    search?: string, 
+    profile?: string, 
+    group?: string, 
+    status?: string
+  ): Promise<{ users: User[], total: number }> {
+    const offset = (page - 1) * limit;
+    
+    let conditions = [];
+    
+    if (search) {
+      conditions.push(
+        or(
+          like(users.username, `%${search}%`),
+          like(users.fullName, `%${search}%`),
+          like(users.email, `%${search}%`)
+        )
+      );
+    }
+    
+    if (profile && profile !== 'all') {
+      conditions.push(eq(users.role, profile));
+    }
+    
+    if (status && status !== 'all') {
+      conditions.push(eq(users.status, status));
+    }
+    
+    // Aplicar condições se houver
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+    
+    // Consulta com paginação
+    const resultUsers = whereClause 
+      ? await db.select().from(users).where(whereClause).limit(limit).offset(offset)
+      : await db.select().from(users).limit(limit).offset(offset);
+    
+    // Consulta para contagem total
+    const [{ count }] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(users)
+      .where(whereClause || sql`1=1`);
+    
+    return { 
+      users: resultUsers, 
+      total: Number(count) 
+    };
+  }
+  
+  // GROUPS
+  async getGroups(): Promise<Group[]> {
+    return db.select().from(groups);
+  }
+
+  async getGroup(id: number): Promise<Group | undefined> {
+    const [group] = await db.select().from(groups).where(eq(groups.id, id));
+    return group;
+  }
+
+  async createGroup(groupData: InsertGroup): Promise<Group> {
+    const [group] = await db.insert(groups).values(groupData).returning();
+    return group;
+  }
+  
+  // CHANNELS
+  async getChannels(): Promise<Channel[]> {
+    return db.select().from(channels);
+  }
+
+  async getChannel(id: number): Promise<Channel | undefined> {
+    const [channel] = await db.select().from(channels).where(eq(channels.id, id));
+    return channel;
+  }
+
+  async createChannel(channelData: InsertChannel): Promise<Channel> {
+    const [channel] = await db.insert(channels).values(channelData).returning();
+    return channel;
+  }
+  
+  // CONVERSATIONS
+  async getConversations(
+    page: number, 
+    limit: number, 
+    search?: string, 
+    status?: string, 
+    channel?: string
+  ): Promise<Conversation[]> {
+    const offset = (page - 1) * limit;
+    
+    let conditions = [];
+    
+    if (search) {
+      conditions.push(like(conversations.title, `%${search}%`));
+    }
+    
+    if (status && status !== 'all') {
+      conditions.push(eq(conversations.status, status));
+    }
+    
+    if (channel && channel !== 'all') {
+      conditions.push(eq(conversations.channelId, parseInt(channel)));
+    }
+    
+    // Aplicar condições se houver
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+    
+    // Consulta com paginação
+    const result = whereClause 
+      ? await db.select().from(conversations).where(whereClause).limit(limit).offset(offset)
+      : await db.select().from(conversations).limit(limit).offset(offset);
+    
+    return result;
+  }
+
+  async getConversation(id: number): Promise<Conversation | undefined> {
+    const [conversation] = await db.select().from(conversations).where(eq(conversations.id, id));
+    return conversation;
+  }
+
+  async createConversation(conversationData: InsertConversation): Promise<Conversation> {
+    const [conversation] = await db.insert(conversations).values(conversationData).returning();
+    return conversation;
+  }
   
   constructor() {
     this.users = new Map();
@@ -844,4 +970,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
