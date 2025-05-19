@@ -8,17 +8,19 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { NovoCanalDialog } from '@/components/canais/novo-canal-dialog';
 
 export default function CanaisPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Fetch organization settings
-  const { data: organizationSettings } = useQuery({
+  const { data: organizationSettings = { name: 'Colégio Vila Educação' } } = useQuery<any>({
     queryKey: ['/api/organization-settings'],
   });
 
   // Fetch channels
-  const { data: channels = [] } = useQuery({
+  const { data: channels = [] } = useQuery<any[]>({
     queryKey: ['/api/channels'],
   });
 
@@ -28,9 +30,9 @@ export default function CanaisPage() {
     (channel.description && channel.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  // Function to create a new channel
-  const createNewChannel = () => {
-    alert('Aqui abriria um modal para criar um novo canal');
+  // Function to open the new channel dialog
+  const openChannelDialog = () => {
+    setIsDialogOpen(true);
   };
 
   // Function to format channel type in Portuguese
@@ -86,7 +88,7 @@ export default function CanaisPage() {
               <p className="text-neutral-500">Gerencie todos os canais de comunicação</p>
             </div>
             <Button 
-              onClick={createNewChannel}
+              onClick={openChannelDialog}
               className="bg-primary-500 hover:bg-primary-600"
             >
               <span className="material-icons-outlined mr-2">add</span>
@@ -285,6 +287,9 @@ export default function CanaisPage() {
           </Tabs>
         </main>
       </div>
+      
+      {/* Dialog de novo canal */}
+      <NovoCanalDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </div>
   );
 }

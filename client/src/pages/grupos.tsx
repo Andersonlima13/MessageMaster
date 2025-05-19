@@ -8,18 +8,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { NovoGrupoDialog } from '@/components/grupos/novo-grupo-dialog';
 
 export default function GruposPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [visibilityFilter, setVisibilityFilter] = useState('all');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Fetch organization settings
-  const { data: organizationSettings } = useQuery({
+  const { data: organizationSettings = { name: 'Colégio Vila Educação' } } = useQuery<any>({
     queryKey: ['/api/organization-settings'],
   });
 
   // Fetch groups
-  const { data: groups = [] } = useQuery({
+  const { data: groups = [] } = useQuery<any[]>({
     queryKey: ['/api/groups'],
   });
 
