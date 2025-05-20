@@ -11,7 +11,7 @@ export function OrganizationModule({ settings }: OrganizationModuleProps) {
   const isLoading = !settings;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+    <div className="bg-background rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800 p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-heading text-lg font-semibold text-neutral-800">Configurações</h3>
         <button className="text-primary-500 hover:text-primary-600">

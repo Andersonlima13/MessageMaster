@@ -48,7 +48,7 @@ export default function Dashboard() {
           <ConversationMetrics channels={channels} />
           
           {/* Advanced Metrics Section */}
-          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6 mb-8">
+          <div className="bg-background rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800 p-6 mb-8">
             <AdvancedMetrics />
           </div>
 
