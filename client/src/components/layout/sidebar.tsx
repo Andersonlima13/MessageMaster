@@ -70,6 +70,24 @@ export function Sidebar({ organizationName }: SidebarProps) {
             <span className="material-icons-outlined sidebar-link-icon">sync</span>
             <span className="font-medium">Integrações</span>
           </Link>
+          <button 
+            onClick={() => {
+              const isDark = !document.documentElement.classList.contains('dark');
+              document.documentElement.classList.toggle('dark', isDark);
+              localStorage.setItem('darkMode', isDark.toString());
+            }}
+            className="sidebar-link w-full flex justify-between items-center mt-2 px-4"
+          >
+            <div className="flex items-center">
+              <span className="material-icons-outlined sidebar-link-icon">
+                {document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}
+              </span>
+              <span className="font-medium">Modo Escuro</span>
+            </div>
+            <div className={`w-10 h-5 rounded-full transition-colors duration-200 ease-in-out ${document.documentElement.classList.contains('dark') ? 'bg-purple-600' : 'bg-gray-200'} relative`}>
+              <div className={`w-4 h-4 rounded-full bg-white absolute top-0.5 left-0.5 transition-transform duration-200 ease-in-out ${document.documentElement.classList.contains('dark') ? 'translate-x-5' : ''}`} />
+            </div>
+          </button>
         </nav>
       </div>
       

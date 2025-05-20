@@ -52,6 +52,9 @@
 .dark {
   --background: 0 0% 10%;
   --foreground: 0 0% 100%;
+  --sidebar-background: 270 10% 15%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-border: 270 10% 20%;
   
   --muted: 270 10% 20%;
   --muted-foreground: 270 5% 80%;
