@@ -58,9 +58,9 @@ export function ConversationMetrics({ channels = [] }: ConversationMetricsProps)
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6 mb-8">
+    <div className="bg-background rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800 p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="font-heading text-lg font-semibold text-neutral-800">Dados Gerais das Conversas</h3>
+        <h3 className="font-heading text-lg font-semibold text-foreground">Dados Gerais das Conversas</h3>
         <button className="text-primary-500 text-sm flex items-center hover:underline">
           Ver relatório completo
           <span className="material-icons-outlined text-sm ml-1">chevron_right</span>

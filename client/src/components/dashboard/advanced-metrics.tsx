@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 export function AdvancedMetrics() {
   // Fetch additional metrics data if needed
   // For now we'll use static data
-  
+
   // Message volume by hour data
   const hourlyMessageData = [
     { hour: '00:00', value: 12 },
@@ -90,7 +90,7 @@ export function AdvancedMetrics() {
             <TabsTrigger value="users">Usuários Ativos</TabsTrigger>
             <TabsTrigger value="response">Tempo de Resposta</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="messages" className="space-y-4">
             <Card>
               <CardHeader>
@@ -110,13 +110,13 @@ export function AdvancedMetrics() {
                   />
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Total de Mensagens</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Total de Mensagens</h4>
                     <p className="text-2xl font-bold">1,425</p>
                     <p className="text-xs text-neutral-500 mt-1">Últimos 30 dias</p>
                   </div>
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Horário de Pico</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Horário de Pico</h4>
                     <p className="text-2xl font-bold">15:00 - 16:00</p>
                     <p className="text-xs text-neutral-500 mt-1">63 mensagens</p>
                   </div>
@@ -124,7 +124,7 @@ export function AdvancedMetrics() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="readRate" className="space-y-4">
             <Card>
               <CardHeader>
@@ -144,13 +144,13 @@ export function AdvancedMetrics() {
                   />
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Taxa Média de Leitura</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Taxa Média de Leitura</h4>
                     <p className="text-2xl font-bold">83.2%</p>
                     <p className="text-xs text-neutral-500 mt-1">Últimos 60 dias</p>
                   </div>
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Taxa de Engajamento</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Taxa de Engajamento</h4>
                     <p className="text-2xl font-bold">62.5%</p>
                     <p className="text-xs text-neutral-500 mt-1">Respostas/Visualizações</p>
                   </div>
@@ -158,7 +158,7 @@ export function AdvancedMetrics() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="channels" className="space-y-4">
             <Card>
               <CardHeader>
@@ -176,13 +176,13 @@ export function AdvancedMetrics() {
                   />
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Canal Mais Ativo</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Canal Mais Ativo</h4>
                     <p className="text-2xl font-bold">Professores</p>
                     <p className="text-xs text-neutral-500 mt-1">320 mensagens (34.6%)</p>
                   </div>
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Tempo Médio de Sessão</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Tempo Médio de Sessão</h4>
                     <p className="text-2xl font-bold">12min 30s</p>
                     <p className="text-xs text-neutral-500 mt-1">Por usuário</p>
                   </div>
@@ -190,7 +190,7 @@ export function AdvancedMetrics() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="users" className="space-y-4">
             <Card>
               <CardHeader>
@@ -209,13 +209,13 @@ export function AdvancedMetrics() {
                   />
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Usuários Ativos Diários</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Usuários Ativos Diários</h4>
                     <p className="text-2xl font-bold">350</p>
                     <p className="text-xs text-success-500 mt-1">↑ 4.5% vs semana anterior</p>
                   </div>
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Usuários Ativos Mensais</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Usuários Ativos Mensais</h4>
                     <p className="text-2xl font-bold">560</p>
                     <p className="text-xs text-success-500 mt-1">↑ 2.8% vs mês anterior</p>
                   </div>
@@ -223,7 +223,7 @@ export function AdvancedMetrics() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="response" className="space-y-4">
             <Card>
               <CardHeader>
@@ -243,13 +243,13 @@ export function AdvancedMetrics() {
                   />
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Tempo Médio Geral</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Tempo Médio Geral</h4>
                     <p className="text-2xl font-bold">96 min</p>
                     <p className="text-xs text-success-500 mt-1">↓ 12% vs mês anterior</p>
                   </div>
-                  <div className="bg-neutral-50 rounded-lg p-4">
-                    <h4 className="text-sm font-medium text-neutral-500 mb-1">Canal Mais Rápido</h4>
+                  <div className="bg-muted rounded-lg p-4 dark:bg-neutral-800">
+                    <h4 className="text-sm font-medium text-muted-foreground mb-1">Canal Mais Rápido</h4>
                     <p className="text-2xl font-bold">Suporte TI</p>
                     <p className="text-xs text-neutral-500 mt-1">15 minutos em média</p>
                   </div>

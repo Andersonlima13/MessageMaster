@@ -35,11 +35,11 @@ export function KpiCard({
   className
 }: KpiCardProps) {
   return (
-    <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-neutral-200", className)}>
+    <div className={cn("bg-background rounded-lg shadow-sm p-6 border border-neutral-200 dark:border-neutral-800", className)}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-neutral-500 text-sm">{title}</p>
-          <h3 className="text-2xl font-bold text-neutral-800 mt-1">{value}</h3>
+          <p className="text-muted-foreground text-sm">{title}</p>
+          <h3 className="text-2xl font-bold text-foreground mt-1">{value}</h3>
           {tag && (
             <div className="flex items-center mt-2">
               <span className={`text-xs font-medium px-2 py-1 ${tag.bgColor} ${tag.textColor} rounded`}>
