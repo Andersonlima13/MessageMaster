@@ -19,11 +19,11 @@ export function ConversationMetrics({ channels = [] }: ConversationMetricsProps)
   // Helper function to render CSAT stars
   const renderCsatStars = (score?: number) => {
     if (!score) return null;
-    
+
     const fullStars = Math.floor(score);
     const hasHalfStar = score % 1 >= 0.5;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    
+
     return (
       <div className="flex text-yellow-400">
         {[...Array(fullStars)].map((_, i) => (
@@ -61,12 +61,12 @@ export function ConversationMetrics({ channels = [] }: ConversationMetricsProps)
     <div className="bg-background rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800 p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-heading text-lg font-semibold text-foreground">Dados Gerais das Conversas</h3>
-        <button className="text-primary-500 text-sm flex items-center hover:underline">
+        <a href="/conversation-analytics" className="text-primary-500 text-sm flex items-center hover:underline">
           Ver relatório completo
           <span className="material-icons-outlined text-sm ml-1">chevron_right</span>
-        </button>
+        </a>
       </div>
-      
+
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
