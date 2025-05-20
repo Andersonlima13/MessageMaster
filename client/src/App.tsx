@@ -27,6 +27,11 @@ function Router() {
 }
 
 function App() {
+  React.useEffect(() => {
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    document.documentElement.classList.toggle('dark', isDark);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

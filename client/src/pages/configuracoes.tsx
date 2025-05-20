@@ -99,13 +99,13 @@ export default function ConfiguracoesPage() {
       <Sidebar organizationName={organizationSettings?.name || 'ClassApp'} />
       <div className="flex-1 overflow-hidden flex flex-col">
         <Header organizationName={organizationSettings?.name || 'Colégio Vila Educação'} />
-        
+
         <main className="flex-1 p-6 overflow-auto">
           <div className="mb-6">
             <h2 className="font-heading text-2xl font-bold text-neutral-800">Configurações</h2>
             <p className="text-neutral-500">Gerencie suas preferências e informações de conta</p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* User Profile Sidebar */}
             <div className="lg:col-span-1">
@@ -153,7 +153,7 @@ export default function ConfiguracoesPage() {
                 </CardFooter>
               </Card>
             </div>
-            
+
             {/* Settings Content */}
             <div className="lg:col-span-3">
               <Tabs defaultValue="profile" className="w-full">
@@ -162,7 +162,7 @@ export default function ConfiguracoesPage() {
                   <TabsTrigger value="security">Segurança</TabsTrigger>
                   <TabsTrigger value="notifications">Notificações</TabsTrigger>
                 </TabsList>
-                
+
                 {/* Profile Tab */}
                 <TabsContent value="profile">
                   <Card>
@@ -196,7 +196,7 @@ export default function ConfiguracoesPage() {
                               />
                             </div>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <Label htmlFor="role">Cargo/Função</Label>
                             <Input 
@@ -208,7 +208,7 @@ export default function ConfiguracoesPage() {
                               Seu cargo/função é definido pelo administrador do sistema.
                             </p>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <Label htmlFor="avatar">Foto do Perfil</Label>
                             <div className="flex items-center gap-4">
@@ -231,7 +231,7 @@ export default function ConfiguracoesPage() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="mt-6">
                           <Button type="submit" className="bg-primary-500">
                             Salvar Alterações
@@ -241,7 +241,7 @@ export default function ConfiguracoesPage() {
                     </CardContent>
                   </Card>
                 </TabsContent>
-                
+
                 {/* Security Tab */}
                 <TabsContent value="security">
                   <Card>
@@ -264,9 +264,9 @@ export default function ConfiguracoesPage() {
                               placeholder="Sua senha atual" 
                             />
                           </div>
-                          
+
                           <Separator />
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                               <Label htmlFor="newPassword">Nova Senha</Label>
@@ -289,7 +289,7 @@ export default function ConfiguracoesPage() {
                               />
                             </div>
                           </div>
-                          
+
                           <div>
                             <p className="text-sm text-gray-500 mb-1">Requisitos de senha:</p>
                             <ul className="list-disc list-inside text-xs text-gray-500 space-y-1">
@@ -300,16 +300,16 @@ export default function ConfiguracoesPage() {
                             </ul>
                           </div>
                         </div>
-                        
+
                         <div className="mt-6">
                           <Button type="submit" className="bg-primary-500">
                             Alterar Senha
                           </Button>
                         </div>
                       </form>
-                      
+
                       <Separator className="my-6" />
-                      
+
                       <div>
                         <h3 className="text-lg font-medium mb-4">Sessões Ativas</h3>
                         <div className="space-y-4">
@@ -329,7 +329,7 @@ export default function ConfiguracoesPage() {
                               </Button>
                             </div>
                           </div>
-                          
+
                           <Button variant="outline" className="w-full">
                             <span className="material-icons-outlined mr-2">logout</span>
                             Encerrar Todas as Outras Sessões
@@ -339,7 +339,7 @@ export default function ConfiguracoesPage() {
                     </CardContent>
                   </Card>
                 </TabsContent>
-                
+
                 {/* Notifications Tab */}
                 <TabsContent value="notifications">
                   <Card>
@@ -365,9 +365,9 @@ export default function ConfiguracoesPage() {
                                 onCheckedChange={setEmailNotifications}
                               />
                             </div>
-                            
+
                             <Separator />
-                            
+
                             <div className="flex items-center justify-between">
                               <div className="space-y-0.5">
                                 <Label htmlFor="push-notifications">Notificações Push</Label>
@@ -381,9 +381,9 @@ export default function ConfiguracoesPage() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <Separator />
-                        
+
                         <div>
                           <h3 className="text-lg font-medium mb-4">Tipos de Notificação</h3>
                           <div className="space-y-4">
@@ -394,9 +394,9 @@ export default function ConfiguracoesPage() {
                               </div>
                               <Switch defaultChecked />
                             </div>
-                            
+
                             <Separator />
-                            
+
                             <div className="flex items-center justify-between">
                               <div className="space-y-0.5">
                                 <Label>Comunicados</Label>
@@ -404,9 +404,9 @@ export default function ConfiguracoesPage() {
                               </div>
                               <Switch defaultChecked />
                             </div>
-                            
+
                             <Separator />
-                            
+
                             <div className="flex items-center justify-between">
                               <div className="space-y-0.5">
                                 <Label>Menções</Label>
@@ -416,27 +416,32 @@ export default function ConfiguracoesPage() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <Separator />
-                        
-                        <div>
-                          <h3 className="text-lg font-medium mb-4">Preferências de Aparência</h3>
-                          <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                              <div className="space-y-0.5">
-                                <Label htmlFor="dark-mode">Modo Escuro</Label>
-                                <p className="text-sm text-gray-500">Ativar modo escuro para a interface.</p>
-                              </div>
-                              <Switch
-                                id="dark-mode"
-                                checked={darkMode}
-                                onCheckedChange={setDarkMode}
-                              />
-                            </div>
-                          </div>
-                        </div>
+
+                        <div className="brutalist-card p-6 mt-6">
+                <h3 className="brutalist-subtitle mb-4">APARÊNCIA</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-4 border-black p-4">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="dark-mode" className="text-lg font-black">MODO ESCURO</Label>
+                      <p className="text-sm">Ativar modo escuro para toda a interface.</p>
+                    </div>
+                    <Switch
+                      id="dark-mode"
+                      checked={darkMode}
+                      onCheckedChange={(checked) => {
+                        setDarkMode(checked);
+                        document.documentElement.classList.toggle('dark', checked);
+                        localStorage.setItem('darkMode', checked.toString());
+                      }}
+                      className="data-[state=checked]:bg-purple-800"
+                    />
+                  </div>
+                </div>
+              </div>
                       </div>
-                      
+
                       <div className="mt-6">
                         <Button className="bg-primary-500">
                           Salvar Preferências
