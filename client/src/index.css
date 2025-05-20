@@ -51,17 +51,17 @@
 
 .dark {
   --background: 0 0% 10%;
-  --foreground: 0 0% 100%;
+  --foreground: 0 0% 98%;
   
   --card: 0 0% 15%;
-  --card-foreground: 0 0% 100%;
+  --card-foreground: 0 0% 98%;
   
   --sidebar-background: 0 0% 15%;
-  --sidebar-foreground: 0 0% 100%;
+  --sidebar-foreground: 0 0% 98%;
   --sidebar-border: 0 0% 20%;
   
   --muted: 0 0% 20%;
-  --muted-foreground: 0 0% 80%;
+  --muted-foreground: 0 0% 90%;
   
   --primary: 270 90% 60%;
   --primary-foreground: 0 0% 100%;
@@ -106,7 +106,11 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading text-foreground;
+  }
+
+  p {
+    @apply text-foreground/90 dark:text-neutral-200;
   }
 }
 
