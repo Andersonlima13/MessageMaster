@@ -66,6 +66,9 @@
   --primary: 270 90% 60%;
   --primary-foreground: 0 0% 100%;
   
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  
   --popover: 0 0% 10%;
   --popover-foreground: 0 0% 100%;
   

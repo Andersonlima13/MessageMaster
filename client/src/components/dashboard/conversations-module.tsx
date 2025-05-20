@@ -51,7 +51,7 @@ export function ConversationsModule() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-neutral-200">
+    <div className="bg-background rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
       <div className="p-6 border-b border-neutral-200">
         <div className="flex items-center justify-between">
           <h3 className="font-heading text-lg font-semibold text-neutral-800">Conversas</h3>
