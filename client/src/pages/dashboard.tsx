@@ -32,7 +32,7 @@ export default function Dashboard() {
       <div className="flex-1 overflow-auto">
         <Header organizationName={organizationSettings?.name || 'Colégio Vila Educação'} />
         
-        <main className="p-4 sm:p-6 lg:p-8">
+        <main className="p-4 sm:p-6 lg:p-8 bg-background text-foreground">
           <div className="mb-6">
             <h2 className="font-heading text-2xl font-bold text-neutral-800">Painel Principal</h2>
             <p className="text-neutral-500">Acompanhe todas as atividades e métricas da sua escola</p>

@@ -52,12 +52,19 @@
 .dark {
   --background: 0 0% 10%;
   --foreground: 0 0% 100%;
-  --sidebar-background: 270 10% 15%;
-  --sidebar-foreground: 0 0% 100%;
-  --sidebar-border: 270 10% 20%;
   
-  --muted: 270 10% 20%;
-  --muted-foreground: 270 5% 80%;
+  --card: 0 0% 15%;
+  --card-foreground: 0 0% 100%;
+  
+  --sidebar-background: 0 0% 15%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-border: 0 0% 20%;
+  
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 80%;
+  
+  --primary: 270 90% 60%;
+  --primary-foreground: 0 0% 100%;
   
   --popover: 0 0% 10%;
   --popover-foreground: 0 0% 100%;

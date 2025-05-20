@@ -22,7 +22,7 @@ export function Sidebar({ organizationName }: SidebarProps) {
   const isActive = (path: string) => location === path;
 
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-64 bg-white border-r border-neutral-200 shadow-sm">
+    <aside className="hidden lg:flex lg:flex-col lg:w-64 bg-background border-r border-neutral-200 shadow-sm dark:border-neutral-800">
       <div className="flex items-center justify-center h-16 border-b border-neutral-200">
         <div className="flex items-center space-x-3 px-4">
           <div className="w-8 h-8 rounded-md bg-primary-500 text-white flex items-center justify-center">

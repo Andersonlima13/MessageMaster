@@ -27,7 +27,7 @@ export function Header({ organizationName }: HeaderProps) {
   };
 
   return (
-    <header className="bg-white border-b border-neutral-200 shadow-sm">
+    <header className="bg-background border-b border-neutral-200 shadow-sm dark:border-neutral-800">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
