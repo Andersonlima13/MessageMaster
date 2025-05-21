@@ -12,11 +12,11 @@ export default function ConversationAnalytics() {
     queryKey: ['/api/organization-settings'],
   });
 
-  const { data: analytics } = useQuery({
+  const { data: analytics, isLoading } = useQuery({
     queryKey: ['/api/analytics/conversations'],
   });
 
-  if (!analytics) {
+  if (isLoading || !analytics) {
     return (
       <div className="flex h-screen overflow-hidden">
         <Sidebar organizationName={organizationSettings?.name || 'ClassApp'} />
@@ -24,7 +24,10 @@ export default function ConversationAnalytics() {
           <Header organizationName={organizationSettings?.name || 'ClassApp'} />
           <main className="p-4 sm:p-6 lg:p-8 bg-background">
             <div className="flex items-center justify-center h-[calc(100vh-200px)]">
-              <p className="text-neutral-500">Carregando dados...</p>
+              <div className="flex flex-col items-center gap-2">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                <p className="text-muted-foreground">Carregando dados...</p>
+              </div>
             </div>
           </main>
         </div>
@@ -40,12 +43,12 @@ export default function ConversationAnalytics() {
         
         <main className="p-4 sm:p-6 lg:p-8 bg-background">
           <div className="mb-6">
-            <h2 className="font-heading text-2xl font-bold text-neutral-800">Análise de Conversas</h2>
-            <p className="text-neutral-500">Análise detalhada do desempenho dos canais de comunicação</p>
+            <h2 className="font-heading text-2xl font-bold">Análise Detalhada de Conversas</h2>
+            <p className="text-muted-foreground">Análise aprofundada do desempenho dos canais de comunicação</p>
           </div>
 
           <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList>
+            <TabsList className="bg-muted">
               <TabsTrigger value="overview">Visão Geral</TabsTrigger>
               <TabsTrigger value="channels">Por Canal</TabsTrigger>
               <TabsTrigger value="trends">Tendências</TabsTrigger>
@@ -65,6 +68,7 @@ export default function ConversationAnalytics() {
                         categories={['rate']}
                         index="channelName"
                         valueFormatter={(v) => `${v}%`}
+                        colors={["hsl(var(--primary))"]}
                       />
                     </div>
                   </CardContent>
@@ -82,6 +86,7 @@ export default function ConversationAnalytics() {
                         categories={['avgTime']}
                         index="channelName"
                         valueFormatter={(v) => `${v}min`}
+                        colors={["hsl(var(--secondary))"]}
                       />
                     </div>
                   </CardContent>
@@ -130,6 +135,7 @@ export default function ConversationAnalytics() {
                       categories={['count']}
                       index="date"
                       valueFormatter={(v) => `${v} mensagens`}
+                      colors={["hsl(var(--primary))"]}
                     />
                   </div>
                 </CardContent>

@@ -20,48 +20,51 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   getUsers(page: number, limit: number, search?: string, profile?: string, group?: string, status?: string): Promise<{ users: User[], total: number }>;
-  
+
   // Grupos
   getGroups(): Promise<Group[]>;
   getGroup(id: number): Promise<Group | undefined>;
   createGroup(group: InsertGroup): Promise<Group>;
-  
+
   // Canais
   getChannels(): Promise<Channel[]>;
   getChannel(id: number): Promise<Channel | undefined>;
   createChannel(channel: InsertChannel): Promise<Channel>;
-  
+
   // Conversas
   getConversations(page: number, limit: number, search?: string, status?: string, channel?: string): Promise<Conversation[]>;
   getConversation(id: number): Promise<Conversation | undefined>;
   createConversation(conversation: InsertConversation): Promise<Conversation>;
-  
+
   // Mensagens
   getMessage(id: number): Promise<Message | undefined>;
   createMessage(message: InsertMessage): Promise<Message>;
-  
+
   // Anúncios
   getAnnouncements(page: number, limit: number, search?: string, label?: string): Promise<Announcement[]>;
   getAnnouncement(id: number): Promise<Announcement | undefined>;
   createAnnouncement(announcement: InsertAnnouncement): Promise<Announcement>;
-  
+
   // Etiquetas
   getLabels(): Promise<Label[]>;
   getLabel(id: number): Promise<Label | undefined>;
   createLabel(label: InsertLabel): Promise<Label>;
-  
+
   // Links Rápidos
   getQuickLinks(): Promise<QuickLink[]>;
   getQuickLink(id: number): Promise<QuickLink | undefined>;
   createQuickLink(quickLink: InsertQuickLink): Promise<QuickLink>;
-  
+
   // Configurações da Organização
   getOrganizationSettings(): Promise<OrganizationSettings>;
   updateOrganizationSettings(settings: Partial<InsertOrganizationSettings>): Promise<OrganizationSettings>;
-  
+
   // KPIs do Dashboard
   getDashboardKpis(): Promise<DashboardKpi>;
   updateDashboardKpis(kpis: Partial<InsertDashboardKpi>): Promise<DashboardKpi>;
+
+  // Analytics
+  getConversationAnalytics(): Promise<any>;
 }
 
 // Implementação com PostgreSQL
@@ -91,30 +94,30 @@ export class DatabaseStorage implements IStorage {
   ): Promise<{ users: User[], total: number }> {
     const offset = (page - 1) * limit;
     let conditions = [];
-    
+
     if (search) {
       conditions.push(like(users.fullName, `%${search}%`));
     }
-    
+
     if (profile) {
       conditions.push(eq(users.profile, profile));
     }
-    
+
     if (status) {
       conditions.push(eq(users.status, status));
     }
-    
+
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
-    
+
     const result = whereClause 
       ? await db.select().from(users).where(whereClause).limit(limit).offset(offset)
       : await db.select().from(users).limit(limit).offset(offset);
-    
+
     const [{ count }] = await db
       .select({ count: sql<number>`count(*)` })
       .from(users)
       .where(whereClause || sql`TRUE`);
-    
+
     return {
       users: result,
       total: Number(count)
@@ -158,25 +161,25 @@ export class DatabaseStorage implements IStorage {
   ): Promise<Conversation[]> {
     const offset = (page - 1) * limit;
     let conditions = [];
-    
+
     if (search) {
       conditions.push(like(conversations.title || '', `%${search}%`));
     }
-    
+
     if (status) {
       conditions.push(eq(conversations.status || '', status));
     }
-    
+
     if (channel) {
       conditions.push(eq(conversations.channelId, parseInt(channel)));
     }
-    
+
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
-    
+
     const result = whereClause 
       ? await db.select().from(conversations).where(whereClause).limit(limit).offset(offset)
       : await db.select().from(conversations).limit(limit).offset(offset);
-    
+
     return result;
   }
 
@@ -208,17 +211,17 @@ export class DatabaseStorage implements IStorage {
   ): Promise<Announcement[]> {
     const offset = (page - 1) * limit;
     let conditions = [];
-    
+
     if (search) {
       conditions.push(like(announcements.title || '', `%${search}%`));
     }
-    
+
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
-    
+
     const result = whereClause 
       ? await db.select().from(announcements).where(whereClause).limit(limit).offset(offset)
       : await db.select().from(announcements).limit(limit).offset(offset);
-    
+
     return result;
   }
 
@@ -262,7 +265,7 @@ export class DatabaseStorage implements IStorage {
 
   async getOrganizationSettings(): Promise<OrganizationSettings> {
     const settings = await db.select().from(organizationSettings);
-    
+
     if (settings.length === 0) {
       const defaultSettings = {
         name: "Colégio Vila Educação",
@@ -279,15 +282,15 @@ export class DatabaseStorage implements IStorage {
         planMessagesLimit: 1000,
         planMessagesUsed: 250
       };
-      
+
       const [newSettings] = await db
         .insert(organizationSettings)
         .values(defaultSettings)
         .returning();
-      
+
       return newSettings;
     }
-    
+
     return settings[0];
   }
 
@@ -295,19 +298,19 @@ export class DatabaseStorage implements IStorage {
     settingsData: Partial<InsertOrganizationSettings>
   ): Promise<OrganizationSettings> {
     const settings = await this.getOrganizationSettings();
-    
+
     const [updatedSettings] = await db
       .update(organizationSettings)
       .set(settingsData)
       .where(eq(organizationSettings.id, settings.id))
       .returning();
-      
+
     return updatedSettings;
   }
 
   async getDashboardKpis(): Promise<DashboardKpi> {
     const kpis = await db.select().from(dashboardKpis);
-    
+
     if (kpis.length === 0) {
       const defaultKpis = {
         readRate: 87.5,
@@ -319,15 +322,15 @@ export class DatabaseStorage implements IStorage {
         adoptionRateChange: 5.1,
         csatScoreChange: 0.2
       };
-      
+
       const [newKpis] = await db
         .insert(dashboardKpis)
         .values(defaultKpis)
         .returning();
-      
+
       return newKpis;
     }
-    
+
     return kpis[0];
   }
 
@@ -335,14 +338,40 @@ export class DatabaseStorage implements IStorage {
     kpisData: Partial<InsertDashboardKpi>
   ): Promise<DashboardKpi> {
     const kpis = await this.getDashboardKpis();
-    
+
     const [updatedKpis] = await db
       .update(dashboardKpis)
       .set(kpisData)
       .where(eq(dashboardKpis.id, kpis.id))
       .returning();
-      
+
     return updatedKpis;
+  }
+
+  async getConversationAnalytics() {
+    const channels = await this.getChannels();
+    const analyticsData = {
+      responseRates: channels.map(channel => ({
+        channelName: channel.name,
+        rate: Math.floor(Math.random() * 40) + 60 // 60-100% for demo
+      })),
+      responseTimes: channels.map(channel => ({
+        channelName: channel.name,
+        avgTime: Math.floor(Math.random() * 30) + 5 // 5-35min for demo
+      })),
+      channelDetails: channels.map(channel => ({
+        id: channel.id,
+        name: channel.name,
+        messageCount: Math.floor(Math.random() * 1000) + 100,
+        responseRate: Math.floor(Math.random() * 40) + 60,
+        averageResponseTime: Math.floor(Math.random() * 30) + 5
+      })),
+      messageVolume: Array.from({ length: 30 }, (_, i) => ({
+        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        count: Math.floor(Math.random() * 100) + 20
+      }))
+    };
+    return analyticsData;
   }
 }
 
