@@ -11,6 +11,7 @@ import PessoasPage from "@/pages/pessoas";
 import CanaisPage from "@/pages/canais";
 import GruposPage from "@/pages/grupos";
 import ConfiguracoesPage from "@/pages/configuracoes";
+import ConversationAnalytics from "@/pages/conversation-analytics";
 
 function Router() {
   return (
