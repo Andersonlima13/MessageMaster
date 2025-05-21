@@ -22,6 +22,7 @@ function Router() {
       <Route path="/canais" component={CanaisPage} />
       <Route path="/grupos" component={GruposPage} />
       <Route path="/configuracoes" component={ConfiguracoesPage} />
+      <Route path="/conversation-analytics" component={ConversationAnalytics} />
       <Route component={NotFound} />
     </Switch>
   );

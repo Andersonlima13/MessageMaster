@@ -12,15 +12,31 @@ export default function ConversationAnalytics() {
     queryKey: ['/api/organization-settings'],
   });
 
-  const { data: channels } = useQuery({
-    queryKey: ['/api/channels'],
+  const { data: analytics } = useQuery({
+    queryKey: ['/api/analytics/conversations'],
   });
+
+  if (!analytics) {
+    return (
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar organizationName={organizationSettings?.name || 'ClassApp'} />
+        <div className="flex-1 overflow-auto">
+          <Header organizationName={organizationSettings?.name || 'ClassApp'} />
+          <main className="p-4 sm:p-6 lg:p-8 bg-background">
+            <div className="flex items-center justify-center h-[calc(100vh-200px)]">
+              <p className="text-neutral-500">Carregando dados...</p>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar organizationName={organizationSettings?.name || 'ClassApp'} />
       <div className="flex-1 overflow-auto">
-        <Header organizationName={organizationSettings?.name || 'Colégio Vila Educação'} />
+        <Header organizationName={organizationSettings?.name || 'ClassApp'} />
         
         <main className="p-4 sm:p-6 lg:p-8 bg-background">
           <div className="mb-6">
@@ -31,8 +47,8 @@ export default function ConversationAnalytics() {
           <Tabs defaultValue="overview" className="space-y-6">
             <TabsList>
               <TabsTrigger value="overview">Visão Geral</TabsTrigger>
-              <TabsTrigger value="channels">Canais</TabsTrigger>
-              <TabsTrigger value="responses">Respostas</TabsTrigger>
+              <TabsTrigger value="channels">Por Canal</TabsTrigger>
+              <TabsTrigger value="trends">Tendências</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
@@ -45,12 +61,9 @@ export default function ConversationAnalytics() {
                     <div className="h-80">
                       <Chart
                         type="bar"
-                        data={channels?.map(c => ({
-                          name: c.name,
-                          value: c.responseRate || 0
-                        })) || []}
-                        categories={['value']}
-                        index="name"
+                        data={analytics.responseRates}
+                        categories={['rate']}
+                        index="channelName"
                         valueFormatter={(v) => `${v}%`}
                       />
                     </div>
@@ -65,12 +78,9 @@ export default function ConversationAnalytics() {
                     <div className="h-80">
                       <Chart
                         type="bar"
-                        data={channels?.map(c => ({
-                          name: c.name,
-                          value: c.averageResponseTime || 0
-                        })) || []}
-                        categories={['value']}
-                        index="name"
+                        data={analytics.responseTimes}
+                        categories={['avgTime']}
+                        index="channelName"
                         valueFormatter={(v) => `${v}min`}
                       />
                     </div>
@@ -79,48 +89,47 @@ export default function ConversationAnalytics() {
               </div>
             </TabsContent>
 
-            <TabsContent value="channels" className="space-y-6">
-              {channels?.map((channel) => (
-                <Card key={channel.id}>
-                  <CardHeader>
-                    <CardTitle>{channel.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="bg-muted p-4 rounded-lg">
-                        <h4 className="text-sm font-medium mb-2">Total de Mensagens</h4>
-                        <p className="text-2xl font-bold">{channel.messageCount || 0}</p>
+            <TabsContent value="channels">
+              <div className="grid grid-cols-1 gap-6">
+                {analytics.channelDetails.map((channel) => (
+                  <Card key={channel.id}>
+                    <CardHeader>
+                      <CardTitle>{channel.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-muted p-4 rounded-lg">
+                          <h4 className="text-sm font-medium mb-2">Total de Mensagens</h4>
+                          <p className="text-2xl font-bold">{channel.messageCount}</p>
+                        </div>
+                        <div className="bg-muted p-4 rounded-lg">
+                          <h4 className="text-sm font-medium mb-2">Taxa de Resposta</h4>
+                          <p className="text-2xl font-bold">{channel.responseRate}%</p>
+                        </div>
+                        <div className="bg-muted p-4 rounded-lg">
+                          <h4 className="text-sm font-medium mb-2">Tempo Médio de Resposta</h4>
+                          <p className="text-2xl font-bold">{channel.averageResponseTime}min</p>
+                        </div>
                       </div>
-                      <div className="bg-muted p-4 rounded-lg">
-                        <h4 className="text-sm font-medium mb-2">Taxa de Resposta</h4>
-                        <p className="text-2xl font-bold">{channel.responseRate || 0}%</p>
-                      </div>
-                      <div className="bg-muted p-4 rounded-lg">
-                        <h4 className="text-sm font-medium mb-2">Tempo Médio</h4>
-                        <p className="text-2xl font-bold">{channel.averageResponseTime || 0}min</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </TabsContent>
 
-            <TabsContent value="responses">
+            <TabsContent value="trends">
               <Card>
                 <CardHeader>
-                  <CardTitle>Histórico de Respostas</CardTitle>
+                  <CardTitle>Volume de Mensagens por Dia</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="h-96">
                     <Chart
                       type="line"
-                      data={channels?.map(c => ({
-                        name: c.name,
-                        data: c.responseHistory || []
-                      })) || []}
-                      categories={['value']}
+                      data={analytics.messageVolume}
+                      categories={['count']}
                       index="date"
-                      valueFormatter={(v) => `${v}%`}
+                      valueFormatter={(v) => `${v} mensagens`}
                     />
                   </div>
                 </CardContent>

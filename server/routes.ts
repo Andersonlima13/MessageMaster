@@ -7,7 +7,7 @@ import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
-  
+
   // Current user
   app.get("/api/me", async (_req, res) => {
     try {
@@ -281,6 +281,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ count: 3 });
     } catch (error) {
       res.status(500).json({ message: "Failed to get unread notifications count" });
+    }
+  });
+
+  // Conversation analytics endpoint
+  app.get('/api/analytics/conversations', async (_req, res) => {
+    try {
+        const analytics = await storage.getConversationAnalytics();
+        res.json(analytics);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to get conversation analytics" });
     }
   });
 
